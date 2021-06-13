@@ -28,10 +28,10 @@ from .constant import (
     LAST_IMAGE_KEY,
     LAST_IMAGE_SRC_KEY,
     LAST_VIDEO_CREATED_KEY,
-    LAST_VIDEO_URL_KEY,
-    LAST_VIDEO_THUMBNAIL_URL_KEY,
-    LAST_VIDEO_OBJECT_TYPE,
     LAST_VIDEO_OBJECT_REGION,
+    LAST_VIDEO_OBJECT_TYPE,
+    LAST_VIDEO_THUMBNAIL_URL_KEY,
+    LAST_VIDEO_URL_KEY,
     LIGHT_BRIGHTNESS_KEY,
     LIGHT_MODE_KEY,
     MEDIA_COUNT_KEY,
@@ -166,11 +166,19 @@ class ArloCamera(ArloChildDevice):
         # update latest video details
         if videos:
             if videos[0].created_at != self._load(LAST_VIDEO_CREATED_KEY):
-                self._save_and_do_callbacks(LAST_VIDEO_CREATED_KEY, videos[0].created_at)
+                self._save_and_do_callbacks(
+                    LAST_VIDEO_CREATED_KEY, videos[0].created_at
+                )
                 self._save_and_do_callbacks(LAST_VIDEO_URL_KEY, videos[0].video_url)
-                self._save_and_do_callbacks(LAST_VIDEO_THUMBNAIL_URL_KEY, videos[0].thumbnail_url)
-                self._save_and_do_callbacks(LAST_VIDEO_OBJECT_TYPE, videos[0].object_type)
-                self._save_and_do_callbacks(LAST_VIDEO_OBJECT_REGION, videos[0].object_region)
+                self._save_and_do_callbacks(
+                    LAST_VIDEO_THUMBNAIL_URL_KEY, videos[0].thumbnail_url
+                )
+                self._save_and_do_callbacks(
+                    LAST_VIDEO_OBJECT_TYPE, videos[0].object_type
+                )
+                self._save_and_do_callbacks(
+                    LAST_VIDEO_OBJECT_REGION, videos[0].object_region
+                )
 
         # signal video up!
         self._save_and_do_callbacks(CAPTURED_TODAY_KEY, captured_today)
