@@ -87,7 +87,9 @@ class ArloBackEnd(object):
                     ArloBackEnd._session_info = pickle.load(dump)
                     version = ArloBackEnd._session_info.get("version", 1)
                     if version == "2":
-                        session_info = ArloBackEnd._session_info.get(self._arlo.cfg.username, None)
+                        session_info = ArloBackEnd._session_info.get(
+                            self._arlo.cfg.username, None
+                        )
                     else:
                         session_info = ArloBackEnd._session_info
                         ArloBackEnd._session_info = {
@@ -100,7 +102,9 @@ class ArloBackEnd(object):
                         self._sub_id = session_info["sub_id"]
                         self._token = session_info["token"]
                         self._expires_in = session_info["expires_in"]
-                        self._arlo.debug(f"loadv{version}:session_info={ArloBackEnd._session_info}")
+                        self._arlo.debug(
+                            f"loadv{version}:session_info={ArloBackEnd._session_info}"
+                        )
                     else:
                         self._arlo.debug(f"loadv{version}:failed")
         except Exception:
